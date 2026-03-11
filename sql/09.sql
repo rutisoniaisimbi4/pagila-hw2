@@ -1,4 +1,6 @@
-/*
- * Count the number of movies that contain each type of special feature.
- * Order the results alphabetically be the special_feature.
- */
+SELECT feature, COUNT(*) AS num_movies
+FROM (
+    SELECT unnest(special_features) AS feature FROM film
+) AS f
+GROUP BY feature
+ORDER BY feature;

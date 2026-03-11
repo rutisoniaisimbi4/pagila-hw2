@@ -1,7 +1,10 @@
-/*
- * Create a report that shows the total revenue per month and year.
- *
- * HINT:
- * This query is very similar to the previous problem,
- * but requires an additional JOIN.
- */
+SELECT
+    EXTRACT(YEAR FROM payment_date) AS year,
+    EXTRACT(MONTH FROM payment_date) AS month,
+    SUM(amount) AS total_revenue
+FROM payment
+GROUP BY ROLLUP(
+    EXTRACT(YEAR FROM payment_date),
+    EXTRACT(MONTH FROM payment_date)
+)
+ORDER BY year, month;
