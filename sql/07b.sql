@@ -9,6 +9,6 @@ LEFT JOIN (
     JOIN city USING (city_id)
     JOIN country USING (country_id)
     WHERE country.country = 'United States'
-) AS us_rentals ON inventory.inventory_id = us_rentals.inventory_id
+) AS us_rentals USING (inventory_id)
 WHERE us_rentals.inventory_id IS NULL
 ORDER BY film.title;
