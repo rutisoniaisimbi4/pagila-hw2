@@ -7,4 +7,4 @@ GROUP BY ROLLUP(
     EXTRACT(YEAR FROM payment_date),
     EXTRACT(MONTH FROM payment_date)
 )
-ORDER BY "Year", "Month";
+ORDER BY "Year" NULLS LAST, "Month" NULLS LAST;

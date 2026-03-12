@@ -2,9 +2,9 @@ SELECT
     RANK() OVER (ORDER BY revenue DESC) AS rank,
     title,
     revenue,
-    SUM(revenue) OVER (ORDER BY revenue DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "total revenue",
+    SUM(revenue) OVER (ORDER BY revenue DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "total revenue",
     to_char(
-        100.0 * SUM(revenue) OVER (ORDER BY revenue DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+        100.0 * SUM(revenue) OVER (ORDER BY revenue DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
         / SUM(revenue) OVER (),
         'FM990.99'
     ) AS "percent revenue"
