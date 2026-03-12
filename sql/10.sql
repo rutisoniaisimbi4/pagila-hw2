@@ -1,4 +1,4 @@
-SELECT feature, SUM(amount) AS total_profit
+SELECT feature AS special_feature, SUM(amount) AS profit
 FROM (
     SELECT film.film_id, unnest(special_features) AS feature, payment.amount
     FROM film

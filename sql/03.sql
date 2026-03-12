@@ -1,4 +1,4 @@
-SELECT DISTINCT customer.customer_id, customer.first_name, customer.last_name
+SELECT DISTINCT customer.customer_id
 FROM customer
 JOIN rental USING (customer_id)
 JOIN inventory USING (inventory_id)
@@ -13,4 +13,4 @@ WHERE film.film_id IN (
     ORDER BY SUM(payment.amount) DESC
     LIMIT 5
 )
-ORDER BY customer.last_name, customer.first_name;
+ORDER BY customer.customer_id;

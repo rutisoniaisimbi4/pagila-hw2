@@ -1,10 +1,10 @@
 SELECT
-    EXTRACT(YEAR FROM payment_date) AS year,
-    EXTRACT(MONTH FROM payment_date) AS month,
-    SUM(amount) AS total_revenue
+    EXTRACT(YEAR FROM payment_date) AS "Year",
+    EXTRACT(MONTH FROM payment_date) AS "Month",
+    SUM(amount) AS "Total Revenue"
 FROM payment
 GROUP BY ROLLUP(
     EXTRACT(YEAR FROM payment_date),
     EXTRACT(MONTH FROM payment_date)
 )
-ORDER BY year, month;
+ORDER BY "Year", "Month";

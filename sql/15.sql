@@ -1,7 +1,7 @@
-SELECT film.title, SUM(payment.amount) AS revenue
+SELECT film.title, COALESCE(SUM(payment.amount), 0.00) AS revenue
 FROM film
-JOIN inventory USING (film_id)
-JOIN rental USING (inventory_id)
-JOIN payment USING (rental_id)
+LEFT JOIN inventory USING (film_id)
+LEFT JOIN rental USING (inventory_id)
+LEFT JOIN payment USING (rental_id)
 GROUP BY film.title
-ORDER BY revenue DESC;
+ORDER BY revenue DESC, film.title;

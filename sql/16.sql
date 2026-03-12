@@ -1,10 +1,10 @@
 SELECT
+    RANK() OVER (ORDER BY SUM(payment.amount) DESC NULLS LAST) AS rank,
     film.title,
-    SUM(payment.amount) AS revenue,
-    RANK() OVER (ORDER BY SUM(payment.amount) DESC) AS rank
+    COALESCE(SUM(payment.amount), 0.00) AS revenue
 FROM film
-JOIN inventory USING (film_id)
-JOIN rental USING (inventory_id)
-JOIN payment USING (rental_id)
+LEFT JOIN inventory USING (film_id)
+LEFT JOIN rental USING (inventory_id)
+LEFT JOIN payment USING (rental_id)
 GROUP BY film.title
-ORDER BY rank;
+ORDER BY rank, film.title;
