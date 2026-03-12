@@ -2,7 +2,7 @@ SELECT DISTINCT film.title
 FROM film
 JOIN inventory USING (film_id)
 LEFT JOIN (
-    SELECT rental.inventory_id
+    SELECT DISTINCT inventory_id
     FROM rental
     JOIN customer USING (customer_id)
     JOIN address USING (address_id)

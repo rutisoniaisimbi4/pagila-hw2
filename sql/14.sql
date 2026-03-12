@@ -1,7 +1,7 @@
 SELECT
     EXTRACT(YEAR FROM payment_date) AS "Year",
     EXTRACT(MONTH FROM payment_date) AS "Month",
-    SUM(amount)::numeric(10,2) AS "Total Revenue"
+    SUM(amount) AS "Total Revenue"
 FROM payment
 GROUP BY ROLLUP(
     EXTRACT(YEAR FROM payment_date),
