@@ -6,7 +6,7 @@ SELECT
     to_char(
         100.0 * SUM(revenue) OVER (ORDER BY revenue DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
         / SUM(revenue) OVER (),
-        'FM000.99'
+        'FM00.99'
     ) AS "percent revenue"
 FROM (
     SELECT film.title, COALESCE(SUM(payment.amount), 0.00) AS revenue
