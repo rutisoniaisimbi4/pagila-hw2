@@ -3,10 +3,13 @@ SELECT
     title,
     revenue,
     SUM(revenue) OVER (ORDER BY revenue DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "total revenue",
-    to_char(
-        100.0 * SUM(revenue) OVER (ORDER BY revenue DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
-        / SUM(revenue) OVER (),
-        'FM00.99'
+    regexp_replace(
+        trim(to_char(
+            100.0 * SUM(revenue) OVER (ORDER BY revenue DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+            / SUM(revenue) OVER (),
+            '000.00'
+        )),
+        '^0', ''
     ) AS "percent revenue"
 FROM (
     SELECT film.title, COALESCE(SUM(payment.amount), 0.00) AS revenue
